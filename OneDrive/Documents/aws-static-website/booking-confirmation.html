@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Confirmed — The Bag Spot</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="nav-brand"
+          >ShopSimple <span>Delight</span></a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="catalogue.html">Catalogue</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="booking.html">Book a Visit</a></li>
+          <li>
+            <a href="cart.html" class="cart-link">
+              Cart <span class="cart-count" style="display: none">0</span>
+            </a>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ===== CONFIRMATION ===== -->
+    <div class="confirmation-page">
+      <div class="confirmation-card" id="confirmation-content">
+        <!-- Populated by JavaScript -->
+        <p>Loading your booking details...</p>
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>&copy; 2026 The Bag Spot. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const card = document.getElementById("confirmation-content");
+
+        // Read booking data saved by booking.js
+        let booking;
+        try {
+          booking = JSON.parse(sessionStorage.getItem("ssd_booking"));
+        } catch (e) {
+          booking = null;
+        }
+
+        if (!booking) {
+          card.innerHTML = `
+          <div class="confirmation-icon">⚠️</div>
+          <h1>No Booking Found</h1>
+          <p>It looks like you arrived here directly. Please submit a booking first.</p>
+          <a href="booking.html" class="btn btn-primary" style="margin-top:1rem">Make a Booking</a>`;
+          return;
+        }
+
+        // Format the date nicely
+        const dateObj = new Date(booking.date + "T00:00:00");
+        const formattedDate = dateObj.toLocaleDateString("en-ZA", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+        // Format time to 12-hour
+        const [h, m] = booking.time.split(":");
+        const hour12 = h % 12 || 12;
+        const ampm = h < 12 ? "AM" : "PM";
+        const formattedTime = `${hour12}:${m} ${ampm}`;
+
+        card.innerHTML = `
+        <div class="confirmation-icon">✅</div>
+        <h1>Booking Request Received!</h1>
+        <p>Thank you, <strong>${booking.name}</strong>. Your store visit request has been submitted.</p>
+
+        <div class="ref-badge">${booking.ref}</div>
+
+        <table class="detail-table">
+          <tr><td>Name</td><td>${booking.name}</td></tr>
+          <tr><td>Email</td><td>${booking.email}</td></tr>
+          <tr><td>Phone</td><td>${booking.phone}</td></tr>
+          <tr><td>Date</td><td>${formattedDate}</td></tr>
+          <tr><td>Time</td><td>${formattedTime}</td></tr>
+          <tr><td>Number of People</td><td>${booking.people}</td></tr>
+          <tr><td>Reason for Visit</td><td>${booking.reason}</td></tr>
+          ${booking.message ? `<tr><td>Message</td><td>${booking.message}</td></tr>` : ""}
+        </table>
+
+        <div class="notice-box">
+          <p>📞 <strong>What happens next?</strong> The The Bag Spot team will contact you within 24 hours to confirm your visit. Please keep your booking reference number safe.</p>
+        </div>
+
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+          <a href="index.html" class="btn btn-primary">Back to Home</a>
+          <a href="catalogue.html" class="btn btn-outline">Browse Catalogue</a>
+        </div>`;
+      });
+    </script>
+  </body>
+</html>

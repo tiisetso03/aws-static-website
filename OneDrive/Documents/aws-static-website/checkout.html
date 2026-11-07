@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout — The Bag Spot</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="nav-brand"
+          >ShopSimple <span>Delight</span></a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="catalogue.html">Catalogue</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="booking.html">Book a Visit</a></li>
+          <li>
+            <a href="cart.html" class="cart-link">
+              Cart <span class="cart-count" style="display: none">0</span>
+            </a>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <div class="page-header">
+      <div class="container">
+        <h1>Checkout</h1>
+        <p>Complete your order details below</p>
+      </div>
+    </div>
+
+    <!-- ===== CHECKOUT ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="checkout-layout">
+          <!-- Order Form -->
+          <div class="form-card">
+            <h3 style="color: var(--purple); margin-bottom: 1.5rem">
+              Your Details
+            </h3>
+            <form id="checkout-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="full-name">Full Name *</label>
+                  <input
+                    type="text"
+                    id="full-name"
+                    placeholder="Your full name"
+                  />
+                  <span class="field-error" id="full-name-error"></span>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="you@example.com"
+                  />
+                  <span class="field-error" id="email-error"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" placeholder="+27 XX XXX XXXX" />
+                <span class="field-error" id="phone-error"></span>
+              </div>
+
+              <div class="form-group">
+                <label>Delivery Option *</label>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input
+                      type="radio"
+                      name="fulfillment"
+                      value="pickup"
+                      checked
+                    />
+                    In-Store Pickup
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="fulfillment" value="delivery" />
+                    Home Delivery
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group hidden" id="address-group">
+                <label for="address">Delivery Address *</label>
+                <textarea
+                  id="address"
+                  placeholder="Street address, suburb, city, postal code"
+                  style="min-height: 80px"
+                ></textarea>
+                <span class="field-error" id="address-error"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="notes">Order Notes (optional)</label>
+                <textarea
+                  id="notes"
+                  placeholder="Any special instructions or requests..."
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="width: 100%; padding: 1rem; font-size: 1rem"
+              >
+                Place Order
+              </button>
+
+              <p
+                style="
+                  font-size: 0.8rem;
+                  text-align: center;
+                  margin-top: 0.75rem;
+                "
+              >
+                By placing your order you agree that The Bag Spot will contact
+                you to confirm and arrange payment.
+              </p>
+            </form>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="order-summary-card">
+            <h3>Order Summary</h3>
+            <div id="checkout-summary">
+              <!-- Populated by checkout.js -->
+            </div>
+            <div style="margin-top: 1rem">
+              <a
+                href="cart.html"
+                style="font-size: 0.85rem; color: var(--purple)"
+                >← Edit Cart</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand">ShopSimple <span>Delight</span></div>
+            <p>Your neighbourhood bag boutique.</p>
+          </div>
+          <div>
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="catalogue.html">Catalogue</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <ul class="footer-links">
+              <li><a href="tel:+27110000000">+27 11 000 0000</a></li>
+              <li>
+                <a href="mailto:hello@shopsimpledelight.co.za"
+                  >hello@shopsimpledelight.co.za</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 The Bag Spot. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/checkout.js"></script>
+  </body>
+</html>

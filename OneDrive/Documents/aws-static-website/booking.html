@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book a Store Visit — The Bag Spot</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="nav-brand"
+          >ShopSimple <span>Delight</span></a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="catalogue.html">Catalogue</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="booking.html">Book a Visit</a></li>
+          <li>
+            <a href="cart.html" class="cart-link">
+              Cart <span class="cart-count" style="display: none">0</span>
+            </a>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <div class="page-header">
+      <div class="container">
+        <h1>Book a Store Visit</h1>
+        <p>Reserve your personal shopping experience at The Bag Spot</p>
+      </div>
+    </div>
+
+    <!-- ===== BOOKING FORM ===== -->
+    <section class="section">
+      <div class="container">
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 3rem;
+            align-items: start;
+          "
+          class="booking-layout"
+        >
+          <!-- Form -->
+          <div class="form-card">
+            <h3 style="color: var(--purple); margin-bottom: 1.5rem">
+              Your Booking Details
+            </h3>
+            <form id="booking-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="full-name">Full Name *</label>
+                  <input
+                    type="text"
+                    id="full-name"
+                    placeholder="Your full name"
+                  />
+                  <span class="field-error" id="full-name-error"></span>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="you@example.com"
+                  />
+                  <span class="field-error" id="email-error"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" placeholder="+27 XX XXX XXXX" />
+                <span class="field-error" id="phone-error"></span>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="visit-date">Preferred Date *</label>
+                  <input type="date" id="visit-date" />
+                  <span class="field-error" id="visit-date-error"></span>
+                </div>
+                <div class="form-group">
+                  <label for="visit-time">Preferred Time *</label>
+                  <select id="visit-time">
+                    <option value="">Select a time</option>
+                    <option value="09:00">09:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="13:00">01:00 PM</option>
+                    <option value="14:00">02:00 PM</option>
+                    <option value="15:00">03:00 PM</option>
+                    <option value="16:00">04:00 PM</option>
+                  </select>
+                  <span class="field-error" id="visit-time-error"></span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="num-people">Number of People *</label>
+                  <select id="num-people">
+                    <option value="">Select</option>
+                    <option value="1">1 person</option>
+                    <option value="2">2 people</option>
+                    <option value="3">3 people</option>
+                    <option value="4">4 people</option>
+                    <option value="5+">5 or more</option>
+                  </select>
+                  <span class="field-error" id="num-people-error"></span>
+                </div>
+                <div class="form-group">
+                  <label for="visit-reason">Reason for Visit *</label>
+                  <select id="visit-reason">
+                    <option value="">Select a reason</option>
+                    <option value="Personal Shopping">Personal Shopping</option>
+                    <option value="Gift Consultation">Gift Consultation</option>
+                    <option value="View New Collection">
+                      View New Collection
+                    </option>
+                    <option value="General Store Visit">
+                      General Store Visit
+                    </option>
+                  </select>
+                  <span class="field-error" id="visit-reason-error"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Additional Message (optional)</label>
+                <textarea
+                  id="message"
+                  placeholder="Any special requests or things you'd like us to know..."
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="width: 100%; padding: 1rem; font-size: 1rem"
+              >
+                Confirm Booking Request
+              </button>
+            </form>
+          </div>
+
+          <!-- Info sidebar -->
+          <div>
+            <div
+              style="
+                background: var(--purple);
+                color: #fff;
+                border-radius: var(--radius);
+                padding: 2rem;
+                margin-bottom: 1.5rem;
+              "
+            >
+              <h3 style="color: var(--gold); margin-bottom: 1.25rem">
+                Store Information
+              </h3>
+              <div style="margin-bottom: 1rem">
+                <div
+                  style="
+                    font-size: 0.8rem;
+                    color: rgba(255, 255, 255, 0.6);
+                    margin-bottom: 0.2rem;
+                  "
+                >
+                  Address
+                </div>
+                <div>123 Boutique Lane, Sandton<br />Johannesburg, 2196</div>
+              </div>
+              <div style="margin-bottom: 1rem">
+                <div
+                  style="
+                    font-size: 0.8rem;
+                    color: rgba(255, 255, 255, 0.6);
+                    margin-bottom: 0.2rem;
+                  "
+                >
+                  Phone
+                </div>
+                <div>+27 11 000 0000</div>
+              </div>
+              <div style="margin-bottom: 1rem">
+                <div
+                  style="
+                    font-size: 0.8rem;
+                    color: rgba(255, 255, 255, 0.6);
+                    margin-bottom: 0.2rem;
+                  "
+                >
+                  Opening Hours
+                </div>
+                <div style="font-size: 0.9rem">
+                  Mon – Fri: 9:00 AM – 5:00 PM<br />
+                  Saturday: 9:00 AM – 3:00 PM<br />
+                  Sunday: Closed
+                </div>
+              </div>
+            </div>
+            <div class="notice-box">
+              <p>
+                <strong>How it works:</strong> Submit your booking request and
+                we'll contact you within 24 hours to confirm your visit. No
+                payment is required to book.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand">ShopSimple <span>Delight</span></div>
+            <p>Your neighbourhood bag boutique.</p>
+          </div>
+          <div>
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="catalogue.html">Catalogue</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <ul class="footer-links">
+              <li><a href="tel:+27110000000">+27 11 000 0000</a></li>
+              <li>
+                <a href="mailto:hello@shopsimpledelight.co.za"
+                  >hello@shopsimpledelight.co.za</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 The Bag Spot. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/booking.js"></script>
+    <style>
+      @media (max-width: 860px) {
+        .booking-layout {
+          grid-template-columns: 1fr !important;
+        }
+      }
+    </style>
+  </body>
+</html>

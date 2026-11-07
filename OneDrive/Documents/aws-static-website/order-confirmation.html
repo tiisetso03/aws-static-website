@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Confirmed — The Bag Spot</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="nav-brand"
+          >ShopSimple <span>Delight</span></a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="catalogue.html">Catalogue</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="booking.html">Book a Visit</a></li>
+          <li>
+            <a href="cart.html" class="cart-link">
+              Cart <span class="cart-count" style="display: none">0</span>
+            </a>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ===== CONFIRMATION ===== -->
+    <div class="confirmation-page">
+      <div class="confirmation-card" id="order-confirmation-content">
+        <p>Loading your order details...</p>
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>&copy; 2026 The Bag Spot. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const card = document.getElementById("order-confirmation-content");
+
+        let order;
+        try {
+          order = JSON.parse(sessionStorage.getItem("ssd_order"));
+        } catch (e) {
+          order = null;
+        }
+
+        if (!order) {
+          card.innerHTML = `
+          <div class="confirmation-icon">⚠️</div>
+          <h1>No Order Found</h1>
+          <p>It looks like you arrived here directly. Please place an order first.</p>
+          <a href="catalogue.html" class="btn btn-primary" style="margin-top:1rem">Browse Catalogue</a>`;
+          return;
+        }
+
+        // Build ordered items list
+        const itemsHtml = order.items
+          .map(function (item) {
+            return `<tr>
+          <td>${item.name}</td>
+          <td style="text-align:center">${item.qty}</td>
+          <td style="text-align:right">${formatPrice(item.price * item.qty)}</td>
+        </tr>`;
+          })
+          .join("");
+
+        const fulfillmentLabel =
+          order.fulfillment === "delivery"
+            ? "Home Delivery"
+            : "In-Store Pickup";
+
+        card.innerHTML = `
+        <div class="confirmation-icon">🎉</div>
+        <h1>Order Received!</h1>
+        <p>Thank you, <strong>${order.name}</strong>! Your order has been submitted successfully.</p>
+
+        <div class="ref-badge">${order.ref}</div>
+
+        <table class="detail-table" style="margin-bottom:1rem">
+          <tr><td>Name</td><td>${order.name}</td></tr>
+          <tr><td>Email</td><td>${order.email}</td></tr>
+          <tr><td>Phone</td><td>${order.phone}</td></tr>
+          <tr><td>Fulfilment</td><td>${fulfillmentLabel}</td></tr>
+          ${order.address ? `<tr><td>Address</td><td>${order.address}</td></tr>` : ""}
+          ${order.notes ? `<tr><td>Notes</td><td>${order.notes}</td></tr>` : ""}
+        </table>
+
+        <h3 style="color:var(--purple);text-align:left;margin-bottom:.75rem">Items Ordered</h3>
+        <table style="width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:.9rem">
+          <thead>
+            <tr style="border-bottom:2px solid var(--border)">
+              <th style="text-align:left;padding:.5rem">Product</th>
+              <th style="text-align:center;padding:.5rem">Qty</th>
+              <th style="text-align:right;padding:.5rem">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>${itemsHtml}</tbody>
+          <tfoot>
+            <tr style="border-top:2px solid var(--border)">
+              <td colspan="2" style="padding:.75rem .5rem;font-weight:800;color:var(--purple)">Total</td>
+              <td style="text-align:right;padding:.75rem .5rem;font-weight:800;color:var(--purple)">${formatPrice(order.total)}</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div class="notice-box">
+          <p>📞 <strong>What happens next?</strong> The The Bag Spot team will contact you at <strong>${order.phone}</strong> or <strong>${order.email}</strong> to confirm your order and arrange payment and ${order.fulfillment === "delivery" ? "delivery" : "pickup"}. Please keep your order reference safe.</p>
+        </div>
+
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+          <a href="index.html" class="btn btn-primary">Back to Home</a>
+          <a href="catalogue.html" class="btn btn-outline">Continue Shopping</a>
+        </div>`;
+      });
+    </script>
+  </body>
+</html>
